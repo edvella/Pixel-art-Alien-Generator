@@ -8,11 +8,13 @@
 <body>
     <div>
         This idea behind this generator is to quickly create a pixel-art alien monster
-        to be used as a sprite in game prototypes. Hit the reload button to generate a
-        new creature. When you see a creature you like, right-click and save as.
+        to be used as a sprite in game prototypes. Hit the regenerate button to generate a
+        new creature. When you see a creature you like, right-click and save as. Endless fun!
     </div>
 
-    <canvas id="alienCanvas" width="50" height="50"></canvas>
+    <div><canvas id="alienCanvas" width="50" height="50"></canvas></div>
+
+    <div><button onclick="generator.generateAndRender();">Regenerate</button></div>
 
     <script src="AlienGen.js"></script>
 </body>

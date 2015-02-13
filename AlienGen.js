@@ -19,6 +19,7 @@ var generator = {
         }
     },
     renderAlien: function () {
+        ctx.clearRect(0, 0, c.width, c.height);
         for (var i = 0; i < this.numPixels * this.numPixels; i++) {
             if (this.alienContent[i] != 0) {
                 var x = i % this.numPixels;
@@ -26,8 +27,11 @@ var generator = {
                 ctx.fillRect(x * this.pixelSize, y * this.pixelSize, this.pixelSize, this.pixelSize);
             }
         }
+    },
+    generateAndRender: function () {
+        this.generateAlien();
+        this.renderAlien();
     }
 };
 
-generator.generateAlien();
-generator.renderAlien();
+generator.generateAndRender();
