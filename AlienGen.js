@@ -1,37 +1,42 @@
-var c = document.getElementById("alienCanvas");
-var ctx = c.getContext("2d");
 
 var generator = {
-    numPixels: 10,
-    pixelSize: 5,
-    alienContent: [],
-    generateAlien: function () {
-        for (var y = 0; y < this.numPixels; y++) {
-            for (var x = 0; x < this.numPixels; x++) {
-                if (x < Math.round(this.numPixels / 2)) {
-                    this.alienContent[x + y * this.numPixels] = Math.round(Math.random());
+    numBlocks: 10, // the width and height of each alien in 'blocks'
+    pixelSize: 5, // the width and height of each block in pixels
+    alienContent: [], // the place where the alien will be stored
+    generateAlien: function () { // generates a single alien
+        for (var y = 0; y < this.numBlocks; y++) {
+            for (var x = 0; x < this.numBlocks; x++) {
+                if (x < Math.round(this.numBlocks / 2)) {
+                    this.alienContent[x + y * this.numBlocks] = Math.round(Math.random());
                 }
                 else {
-                    this.alienContent[x + y * this.numPixels] =
-                        this.alienContent[(this.numPixels - x - 1) + y * this.numPixels];
+                    this.alienContent[x + y * this.numBlocks] =
+                        this.alienContent[(this.numBlocks - x - 1) + y * this.numBlocks];
                 }
             }
         }
     },
-    renderAlien: function () {
-        ctx.clearRect(0, 0, c.width, c.height);
-        for (var i = 0; i < this.numPixels * this.numPixels; i++) {
+    renderAlien: function (canvas) { // renders the generated alien on the selected canvas
+        var context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < this.numBlocks * this.numBlocks; i++) {
             if (this.alienContent[i] != 0) {
-                var x = i % this.numPixels;
-                var y = Math.floor(i / this.numPixels);
-                ctx.fillRect(x * this.pixelSize, y * this.pixelSize, this.pixelSize, this.pixelSize);
+                var x = i % this.numBlocks;
+                var y = Math.floor(i / this.numBlocks);
+                context.fillRect(x * this.pixelSize, y * this.pixelSize, this.pixelSize, this.pixelSize);
             }
         }
     },
-    generateAndRender: function () {
+    generateAndRender: function (canvas) { // generates and draws one alien on the selected canvas
         this.generateAlien();
-        this.renderAlien();
+        this.renderAlien(canvas);
     }
 };
 
-generator.generateAndRender();
+// Generates and draws all the aliens on the page. Call again to refresh the page with new content.
+function UpdatePage() { 
+    for (var i = 0; i < document.getElementsByClassName("alienCanvas").length ; i++) {
+        var canvas = document.getElementById("alienCanvas" + i);
+        generator.generateAndRender(canvas);
+    }
+}

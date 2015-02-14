@@ -12,10 +12,17 @@
         new creature. When you see a creature you like, right-click and save as. Endless fun!
     </div>
 
-    <div><canvas id="alienCanvas" width="50" height="50"></canvas></div>
+    <div>
+        <canvas id="alienCanvas0" class="alienCanvas" width="50" height="50"></canvas>
+        <canvas id="alienCanvas1" class="alienCanvas" width="50" height="50"></canvas>
+        <canvas id="alienCanvas2" class="alienCanvas" width="50" height="50"></canvas>
+        <canvas id="alienCanvas3" class="alienCanvas" width="50" height="50"></canvas>
+        <canvas id="alienCanvas4" class="alienCanvas" width="50" height="50"></canvas>
+    </div>
 
-    <div><button onclick="generator.generateAndRender();">Regenerate</button></div>
+    <div><button onclick="UpdatePage();">Regenerate</button></div>
 
     <script src="AlienGen.js"></script>
+    <script>UpdatePage();</script>
 </body>
 </html>
